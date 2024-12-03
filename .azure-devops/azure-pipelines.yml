@@ -31,12 +31,6 @@ steps:
     tags: |
       $(tag)
 
-- task: DownloadSecureFile@1
-  name: downloadKey
-  displayName: 'Download SSH Key'
-  inputs:
-    secureFile: 'id_rsa'
-    targetFolder: '$(Build.SourcesDirectory)'
 
 
 
