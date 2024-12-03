@@ -9,7 +9,7 @@ pool:
 
 
 variables:
-  imageRepository: 'dmoraesrs/convertc'
+  imageRepository: 'joaovitor0305/tilabs'
   tag: '$(Build.BuildId)'
   persistCredentials: true
 
@@ -37,21 +37,6 @@ steps:
   inputs:
     secureFile: 'id_rsa'
     targetFolder: '$(Build.SourcesDirectory)'
-- script: |
-    git config --global user.email "dmoraes@outlook.com"
-    git config --global user.name "Diego Moraes"
-    mkdir ~/.ssh
-    cp -R $(Agent.TempDirectory)/* ~/.ssh/
-    chown -R vsts:vsts ~/.ssh
-    chmod 400 ~/.ssh/*
-    git clone git@ssh.dev.azure.com:v3/TILabs00/ArgoCD/temperature-converter-chart
-    ls
-    pwd
-    cd temperature-converter-chart/temperature-converter-c
-    sed -i 's/tag:.*/tag: $(Build.BuildId)/' values.yaml
-    git add values.yaml
-    git commit -m "Atualizando a tag da imagem para $(Build.BuildId)"
-    git push
-  displayName: 'Update and Push Deployment Manifest'
+
 
 
