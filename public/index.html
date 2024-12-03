@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Temperatura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        h1 {
+            color: darkblue;
+        }
+        button {
+            background-color: rgb(255, 0, 64);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkblue;
+        }
+        #result {
+            color: blue;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conversor de Celsius para Fahrenheit</h1>
+    <input type="number" id="celsius" placeholder="Celsius">
+    <button onclick="convert()">Converter</button>
+    <p id="result"></p>
+
+    <script>
+        function convert() {
+            const celsius = document.getElementById('celsius').value;
+            fetch('/convert', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ celsius: parseFloat(celsius) })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = `Resultado: ${data.fahrenheit} °F`;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
